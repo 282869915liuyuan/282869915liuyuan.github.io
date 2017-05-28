@@ -61,6 +61,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Package" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/28/Package/" class="article-date">
+  <time datetime="2017-05-28T06:25:20.500Z" itemprop="datePublished">2017-05-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/28/Package/">JS(小总结)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###预解释</p>
+<ul>
+<li>1.为何学习预解释？<br><br>1）避免很多不规范的写法；<br>2）带var和不带var是有区别的；<br>3）代码写在里面和外面是有区别的；<br></li>
+<li>2.什么是预解释？<br>在当前作用域下，在JS代码执行之前，浏览器会对带var<br>和带function，进行提前声明或定义；</li>
+<li>3.关于预解释？<br>1）带var：只声明不定义；var a；告诉浏览器有个变量叫 a，<br>关于a的内容并不知道；<br>2）带function：声明+定义； var fn=xxffoo;<ul>
+<li>4.函数执行四个阶段：<br>1)形成一个私有作用域<br>2）形参赋值<br>3）预解释<br>4）代码从上到下执行；</li>
+<li>5.作用于链：<br>当函数被调用的时候，会形成一个私有作用域，我们看该作用域下，<br>是否有私有变量A；<br>1）如果有私有变量A：那么该作用于中的A，都是私有变量，跟外界没有<br>任何关系；<br>2）如果没有私有变量A:到上级作用域查找，如果没有，继续往上找，找到<br>window全局作用域还没有的话，报错；</li>
+</ul>
+</li>
+<li>6.带var和不带var的区别：<br>1）带var：1）在全局环境下，属于window的全局属性；2）带var会进行预解释<br>2）不带var：1）属于window的全局属性；2）不带var不会进行预解释；</li>
+<li>7.私有变量有2种：<br>1）当前作用域下，带var的；<br>2）形参；</li>
+<li>8.栈内存和堆内存：<br>栈内存：提供了一个供JS代码执行的环境;(里面可以放轻量级的数据：基本数据类型)<pre><code>全局作用域 和 私有作用域；
+</code></pre>堆内存：堆内存用来存放引用数据类型<pre><code>对象数据类型：键值对
+函数数据类型：代码字符串
+</code></pre></li>
+<li>9.预解释无节操：<br>1）只对等号左边带var的，声明但不定义；<br>2）已经声明过的，不会进行重复声明，但会重新赋值<br>3）在于解释阶段，函数的优先级大于变量<br>4）自执行函数不会进行预解释，只有执行到他的时候，声明+定义+调用同步完成<br>5）条件判断语句中，无论条件是否成立，都会进行预解释<br> 注意：提醒我们不要在条件判断语句中，写函数的定义阶段，因为各大浏览器对条件判断的预解释不同；<br>6）return后面的语句不会进行预解释，return下面的语句，虽然不执行，但会进行预解释；</li>
+<li>10.运算符的优先级：<br>算术》比较》逻辑》赋值</li>
+<li>11.函数返回值出现undefined的情况有两种：<br>1）没有return<br>2）写了return但没有赋值；<br>4.内存及内存释放：<br>1）内存：堆内存和栈内存；<br>var ary=[1,3];<br>堆内存释放：让占用内存地址的变量，指向空指针null;<br>2)栈内存：全局作用域和私有作用域<br>全局作用域：在浏览器加载完HTML页面的时候，全局作用域就形成了；<br>全局作用域销毁：关闭浏览器，关闭当前页面<br>私有作用域：当函数被调用的时候，会形成私有作用域；<br>私有作用域的销毁：<br>   一般情况下，当函数执行完成的时候，默认会进行销毁，有两种特殊情况不销毁：<br>   1）不销毁：当函数体内有东西被外面的变量或者其他占用的时候，该函数不销毁；<br>   2）不立即销毁：当函数执行完成的时候，会返回一个函数的定义阶段，这个返回的函数还需要再次调用；只有等所有的函数都调用完成，这个大函数才能销毁；  </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/28/Package/" data-id="cj38cyd4o0000xopcjmw6kfnr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-liuyuan" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/05/04/liuyuan/" class="article-date">
@@ -98,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/04/liuyuan/" data-id="cj38at8ed000198pciz7nml6u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/04/liuyuan/" data-id="cj38cyd900001xopcgrut0woj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -143,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/04/hello-world/" data-id="cj38at8at000098pc9g8oosqx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/04/hello-world/" data-id="cj38cyd990002xopct78van1q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -181,6 +236,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/28/Package/">JS(小总结)</a>
+          </li>
         
           <li>
             <a href="/2017/05/04/liuyuan/">Hello World</a>
