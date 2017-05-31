@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/28/Package/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="###预解释  1.为何学习预解释？1）避免很多不规范的写法；2）带var和不带var是有区别的；3）代码写在里面和外面是有区别的； 2.什么是预解释？在当前作用域下，在JS代码执行之前，浏览器会对带var和带function，进行提前声明或定义； 3.关于预解释？1）带var：只声明不定义；var a；告诉浏览器有个变量叫 a，关于a的内容并不知道；2）带function：声明+定义； var">
-<meta property="og:updated_time" content="2017-05-29T01:22:24.000Z">
+<meta property="og:updated_time" content="2017-05-31T01:05:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS(小总结)">
 <meta name="twitter:description" content="###预解释  1.为何学习预解释？1）避免很多不规范的写法；2）带var和不带var是有区别的；3）代码写在里面和外面是有区别的； 2.什么是预解释？在当前作用域下，在JS代码执行之前，浏览器会对带var和带function，进行提前声明或定义； 3.关于预解释？1）带var：只声明不定义；var a；告诉浏览器有个变量叫 a，关于a的内容并不知道；2）带function：声明+定义； var">
@@ -119,15 +119,28 @@
 <li>12.关于构造函数的小细节：<br>1）构造函数中的this都是实例；<br>2）构造函数中存放的都是私有的属性和方法；<br>3）实例只跟构造函数中的this.xxx有关，跟var没有任何关系；<br>4）构造函数中，系统默认为我们创建一个实例，并且默认返回一个实例；<br> 不建议自己手动返回对象，如果非要手动返回的话：<br> 1）返回的是基本数据类型，无效，实例该有的属性和方法仍然有；<br> 2）返回的是引用数据类型，以前给实例上添加的属性和方法都无效了；<br>5）构造函数：实例 和 类 打交道<br>6）在new一个实例的时候，如果不需要传参，（）可以省略；</li>
 <li>13.原型模式的基础知识：<br>   1）每个函数数据类型（普通函数，构造函数)上，都有一个属性，叫做prototype,prototype是个原型；<br>   2）prototype这个对象上，存放的都是共有属性和方法，他天生自带一个属性constructor，指向当前这个构造函数；<br>   3）每个对象数据类型（实例，prototype,普通对象）上，都有一个属性叫做<strong>proto</strong>，指向当前实例所属类的原型；<ul>
 <li>14.Object.prototype上的方法：<br>hasOwnProperty():判断是否为对象的私有属性<br>obj1.isPrototypeOf(obj2):obj1是否在obj2的原型链上；<br>propertyIsEnumerable:是否为可枚举的属性</li>
-<li>15 <strong>proto</strong>原型链：<br>如果想查找：对象.属性名<br>1）先看该对象的私有空间中是否有。如果有，说明这个属性是私有属性；<br>2）如果没有，通过<strong>proto</strong>继续往当前实例所属类的原型上找，找到了，说明是公有属性；<br>3)找不到继续通过<strong>proto</strong>一直往上找，找到基类object。prototype原型上，还没有的话undefined；</li>
+<li><ol>
+<li><strong>proto</strong>原型链：<br>如果想查找：对象.属性名<br>1）先看该对象的私有空间中是否有。如果有，说明这个属性是私有属性；<br>2）如果没有，通过<strong>proto</strong>继续往当前实例所属类的原型上找，找到了，说明是公有属性；<br>3)找不到继续通过<strong>proto</strong>一直往上找，找到基类object。prototype原型上，还没有的话undefined；</li>
+</ol>
+</li>
+<li>16.1）在IE浏览器下，禁止用户通过<strong>proto</strong>去修改实例上公有的属性和方法；这是IE浏览器的自我保护机制；<br>   2）在所有浏览器下，禁止用户批量修改，实例上的公有属性和方法；<br>但是我们可以通过 类.prototype.xxx 进行一个个的修改；<br>1）实例.<strong>proto</strong>.属性名（IE下不支持<strong>proto</strong>）；<br>2）类.prototype.属性名</li>
 </ul>
 </li>
+<li>17.链式操作，我们关注的是前一个函数执行完成的‘返回值’，返回的是个数组，后续就跟数组的方法，返回的是个数字<br> 后续就跟数字的方法；（补充）：toFixed（要保留的小数的位数)：四舍五入的表留小数个数；</li>
+<li>18.应该有的条件反射：<br>构造函数：构造函数中this都是实例，构造函数中放的都是私有的属性和方法；<br>prototype:放的都是公有的属性和方法；<br>类.prototype自己赋值一个对象，constructor一定会出问题；</li>
+<li>19.属性操作：<br>注意：判断属性是否在对象上，属性名一定要加引号，否则，会把他当做变量，报错！<br>1）in：判断是否为私有||共有属性<br>2）obj.hasOwnProperty(属性名)：判断是否有对象的私有属性；<br>3）自己封装hasPubProperty:判断某属性是否为对象的公有属性<br>  思路：该属性是对象的属性 &amp;&amp; 该属性不是对象的私有属性；</li>
+<li>20.obj1.isPropertyOf(obj2):判断前一个对象，是否在后一个对象的原型链上；<br>####继承</li>
+<li>1.call() 作用：改变this指向<br>call的第一个参数：改变call点前面的函数中的this指向；<br>call的第二个参数开始，对函数中的形参从左往右的赋值；<br>call继承：把父类私有的属性和方法，都继承给了子类私有的；</li>
+<li>2.冒充继承：把父类私有+公有的属性和方法，都继承给了子类私有的；</li>
+<li>3.原型链继承：把父类私有+公有的属性，都继承给了子类公有的；</li>
+<li>4.拷贝继承：call继承+extend继承<br>extend(obj1,obj2)-&gt;让obj2克隆一份obj1一模一样的内容；</li>
+<li>5.for…in循环：只遍历对象身上自定义的属性和方法；<br>propertyIsEnumerable：只能遍历对象身上的自定义的私有属性和方法；<br>hasOwnProperty:判断改属性是否为对象上的私有属性；</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/28/Package/" data-id="cj39g9nd800008gpc1k3aayc4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/28/Package/" data-id="cj3cajvhv0000i0pcek66fui1" class="article-share-link">Share</a>
       
       
     </footer>
